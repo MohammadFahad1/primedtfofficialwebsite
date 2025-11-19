@@ -92,6 +92,14 @@ const ButtonsAndSliders = () => {
             delivering vibrant and durable prints perfect for apparel and
             textiles.
           </p>
+          
+          <h2 className="text-xl md:text-2xl font-bold text-center my-4">
+            Unit Cost:{" "}
+            <span style={{ fontFamily: "sutonnyOMJ" }} className="text-4xl">
+              ৳
+            </span>
+            {CurrentSheet?.unitPrice}
+          </h2>
           <div className="my-3 md:my-5 flex flex-wrap items-center justify-center gap-5">
             {dtfSheets.map((sheet) => {
               return (
@@ -120,13 +128,6 @@ const ButtonsAndSliders = () => {
             Choose your preferred DTF sheet size above to see a preview of the
             design placement and quality.
           </p>
-          <h2 className="text-xl md:text-2xl font-bold text-center mt-4">
-            Unit Cost:{" "}
-            <span style={{ fontFamily: "sutonnyOMJ" }} className="text-4xl">
-              ৳
-            </span>
-            {CurrentSheet?.unitPrice}
-          </h2>
           <h3 className="text-center mt-4 text-base md:text-lg">
             Send Your Pre-Made Gang Sheet through email to&nbsp;
             <a
