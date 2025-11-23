@@ -13,14 +13,14 @@ export default function NavBar() {
           DTF Custom Transfer
         </Link>
       </li>
-      {/* <li>
+      <li>
         <Link
           className="px-3 py-2 hover:bg-[#bf2340] hover:text-white transition-colors rounded duration-300"
-          href={"/uv-dtf"}
+          href={"/readytodesign"}
         >
-          UV DTF
+          Ready to Design
         </Link>
-      </li> */}
+      </li>
       <li>
         <div className="dropdown dropdown-hover p-0 hover:bg-[#bf2340] hover:text-white">
           <div

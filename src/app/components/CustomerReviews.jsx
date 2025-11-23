@@ -10,10 +10,15 @@ const CustomerReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        const response = await fetch("/api/place-details");
-        const data = await response.json();
-        setPlaceDetails(data);
-        setAllReviews(data.reviews.sort((a, b) => b.time - a.time));
+        await fetch("/api/place-details")
+          .then((res) => res.json())
+          .then((data) => {
+            setPlaceDetails(data);
+            setAllReviews(data.reviews.sort((a, b) => b.time - a.time));
+          })
+          .catch((error) => {
+            console.error("Error parsing JSON:", error);
+          });
       } catch (error) {
         console.error("Error fetching reviews:", error);
       }

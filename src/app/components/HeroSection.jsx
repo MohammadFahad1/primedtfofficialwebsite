@@ -5,7 +5,7 @@ export default function HeroSection() {
   const VIDEO_URL = "/assets/hero-section-bg.mp4";
 
   return (
-    <div className="relative min-h-screen overflow-hidden">
+    <section className="relative md:min-h-screen overflow-hidden">
       <video
         className="absolute inset-0 w-full h-full object-cover"
         src={VIDEO_URL}
@@ -18,7 +18,7 @@ export default function HeroSection() {
 
       <div className="absolute inset-0 bg-black opacity-50 z-10"></div>
 
-      <div className="relative flex items-center justify-center min-h-screen text-neutral-content text-center z-20 p-4">
+      <div className="relative flex items-center justify-center md:min-h-screen text-neutral-content text-center z-20 px-4 py-10 md:py-4">
         <div className="bg-transparent p-4 rounded-xl md:my-16">
           <h3 className="md:text-xl font-bold uppercase text-white">
             Made for Creators
@@ -151,6 +151,6 @@ export default function HeroSection() {
           </h3>
         </div>
       </div>
-    </div>
+    </section>
   );
 }
