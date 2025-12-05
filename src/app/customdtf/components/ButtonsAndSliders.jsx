@@ -92,10 +92,10 @@ const ButtonsAndSliders = () => {
             delivering vibrant and durable prints perfect for apparel and
             textiles.
           </p>
-          
-          <h2 className="text-xl md:text-2xl font-bold text-center my-4">
+
+          <h2 className="text-4xl md:text-4xl font-bold text-center my-4">
             Unit Cost:{" "}
-            <span style={{ fontFamily: "sutonnyOMJ" }} className="text-4xl">
+            <span style={{ fontFamily: "sutonnyOMJ" }} className="text-3xl">
               ৳
             </span>
             {CurrentSheet?.unitPrice}
