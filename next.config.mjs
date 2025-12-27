@@ -18,6 +18,11 @@ const nextConfig = {
         hostname: "maps.googleapis.com",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "res.cloudinary.com",
+        pathname: "/**", // Allows all images from your Cloudinary account
+      },
     ],
   },
 };

@@ -18,7 +18,7 @@ export default function NavBar() {
           className="px-3 py-2 hover:bg-[#bf2340] hover:text-white transition-colors rounded duration-300"
           href={"/readytodesign"}
         >
-          Ready to Design
+          Ready to Press
         </Link>
       </li>
       <li>
@@ -141,6 +141,7 @@ export default function NavBar() {
               height={80}
               alt="logo"
               className="md:mx-auto"
+              style={{ width: "100%", height: "auto" }}
             />
           </Link>
         </div>
@@ -151,15 +152,19 @@ export default function NavBar() {
             height={80}
             alt="logo"
             className="md:mx-auto"
+            style={{ width: "100%", height: "auto" }}
           />
         </Link>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1 text-lg z-20">{NavMenu}</ul>
         </div>
         <div className="navbar-end">
-          <a className="btn btn-neutral border-[#d55027] rounded text-[#d55027] font-bold sm:w-auto px-5 py-3 shadow-lg hover:bg-[#d55027] hover:text-white transition duration-150">
+          <Link
+            href={"https://prime-dtf-backend.vercel.app/admin"}
+            className="btn btn-neutral border-[#d55027] rounded text-[#d55027] font-bold sm:w-auto px-5 py-3 shadow-lg hover:bg-[#d55027] hover:text-white transition duration-150"
+          >
             Login
-          </a>
+          </Link>
         </div>
       </nav>
     </>

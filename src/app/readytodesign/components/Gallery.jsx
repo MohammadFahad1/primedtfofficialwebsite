@@ -1,20 +1,7 @@
 "use client";
 import React, { useEffect, useState } from "react";
-// import lightgallery
-
-import LightGallery from "lightgallery/react";
-
-// import styles
-import "lightgallery/css/lightgallery.css";
-import "lightgallery/css/lg-zoom.css";
-import "lightgallery/css/lg-thumbnail.css";
-
-// import plugins if you need
-import lgThumbnail from "lightgallery/plugins/thumbnail";
-import lgZoom from "lightgallery/plugins/zoom";
+import "glightbox/dist/css/glightbox.min.css";
 import Image from "next/image";
-import Link from "next/link";
-
 function Gallery() {
   const [products, setProducts] = useState([]);
   useEffect(() => {
@@ -23,26 +10,51 @@ function Gallery() {
       .then((data) => setProducts(data))
       .catch((err) => console.log(err));
   }, [products]);
-  console.log(products);
 
-  const onInit = () => {};
+  useEffect(() => {
+    const initLightbox = async () => {
+      const GLightboxModule = await import("glightbox");
+      const GLightbox = GLightboxModule.default;
 
+      const lightbox = GLightbox({
+        selector: ".glightbox",
+        touchNavigation: true,
+        loop: true,
+      });
+    };
+
+    initLightbox();
+  }, [products]);
+
+  if (!products.length) {
+    return (
+      <div className="flex justify-center items-center">
+        <p className="text-5xl font-bold text-center mt-5 animate-pulse text-amber-600">
+          Loading...
+        </p>
+      </div>
+    );
+  }
   return (
-    <div className="App">
-      <LightGallery onInit={onInit} speed={500} plugins={[lgThumbnail, lgZoom]}>
-        {products.map((product) => {
-          return (
-            <Link href={product.image} key={product.id}>
-              <Image
-                alt={product.name}
-                src={product.image}
-                height={500}
-                width={600}
-              />
-            </Link>
-          );
-        })}
-      </LightGallery>
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {products?.map((product) => (
+        <a
+          href={product.image}
+          className="glightbox"
+          key={product.id}
+          data-gallery="product-gallery" // Groups images into a single gallery
+          data-title={product.name}
+          data-description={product.description}
+        >
+          <Image
+            src={product.image}
+            alt={product.title}
+            height={500}
+            width={600}
+            className="hover:scale-105 transition-transform duration-100 shadow-lg"
+          />
+        </a>
+      ))}
     </div>
   );
 }
