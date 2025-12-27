@@ -28,7 +28,7 @@ export default function NavBar() {
             role="button"
             className="px-3 py-2  transition-colors rounded duration-300"
           >
-            Blanks
+            All Products
           </div>
           <ul
             tabIndex="-1"
