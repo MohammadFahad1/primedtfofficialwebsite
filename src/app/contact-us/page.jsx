@@ -9,6 +9,7 @@ import {
   Linkedin,
   Send,
 } from "lucide-react";
+import Form from "./components/Form";
 
 const ContactUsPage = () => {
   const contactInfo = [
@@ -135,79 +136,8 @@ const ContactUsPage = () => {
               <h2 className="text-3xl font-bold mb-6 border-b pb-3 border-gray-700">
                 Send Us a Message
               </h2>
-              <form className="space-y-6">
-                {/* Name & Email Group */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <label className="form-control w-full">
-                    <div className="label">
-                      <span className="label-text text-gray-900 font-bold">
-                        Your Name
-                      </span>
-                    </div>
-                    <input
-                      type="text"
-                      name="name"
-                      placeholder="John Doe"
-                      className="input input-bordered rounded mt-1 w-full bg-white border-2 border-gray-400 text-gray-900 focus:border-orange-500"
-                      required
-                    />
-                  </label>
-                  <label className="form-control w-full">
-                    <div className="label">
-                      <span className="label-text text-gray-900 font-bold">
-                        Your Email
-                      </span>
-                    </div>
-                    <input
-                      type="email"
-                      name="email"
-                      placeholder="email@example.com"
-                      className="input input-bordered rounded mt-1 w-full bg-white border-2 border-gray-400 text-gray-900 focus:border-orange-500"
-                      required
-                    />
-                  </label>
-                </div>
-
-                {/* Subject Field */}
-                <label className="form-control w-full">
-                  <div className="label">
-                    <span className="label-text text-gray-900 font-bold">
-                      Subject
-                    </span>
-                  </div>
-                  <input
-                    type="text"
-                    name="subject"
-                    placeholder="Inquiry about custom transfers"
-                    className="input input-bordered rounded mt-1 w-full bg-white border-2 border-gray-400 text-gray-900 focus:border-orange-500"
-                    required
-                  />
-                </label>
-
-                {/* Message Field */}
-                <label className="form-control block my-5">
-                  <div className="label">
-                    <span className="label-text text-gray-900 font-bold">
-                      Your Message
-                    </span>
-                  </div>
-                  <textarea
-                    name="message"
-                    placeholder="Tell us about your project..."
-                    className="textarea textarea-bordered h-36 md:h-72 mt-1 rounded w-full bg-white border-2 border-gray-400 text-gray-900 focus:border-orange-500"
-                    required
-                  ></textarea>
-                </label>
-
-                {/* Submit Button */}
-                <button
-                  type="submit"
-                  className="btn bg-orange-500 hover:bg-orange-600 text-white border-0 w-full text-lg shadow-lg shadow-orange-500/50 flex items-center justify-center gap-2"
-                >
-                  <Send size={20} />
-                  Send Message
-                </button>
-              </form>
+              {/* Contact Form */}
+              <Form />
             </div>
           </div>
         </div>
