@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Prime DTF",
+  title: "Prime DTF - Custom DTF printing service in Dhaka, Bangladesh.",
   description: "Custom DTG and DTF printing services.",
 };
 
