@@ -1,6 +1,8 @@
+"use client"; // Required for hooks
+
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 export default function NavBar() {
   const NavMenu = (
@@ -80,6 +82,26 @@ export default function NavBar() {
     </>
   );
 
+  const [isVisible, setIsVisible] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 100) {
+        setIsVisible(false); // Scrolling Down
+      } else {
+        setIsVisible(true); // Scrolling Up
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [lastScrollY]);
+
   return (
     <>
       {/* Top Header */}
@@ -105,7 +127,9 @@ export default function NavBar() {
       </div>
       {/* Navbar */}
       <nav
-        className="navbar bg-white text-[#19191C] font-extrabold shadow-sm w-full px-10 md:justify-between z-50"
+        className={`fixed top-0 w-full z-50 transition-transform duration-300 ${
+          isVisible ? "translate-y-0" : "-translate-y-full"
+        } shadow-md navbar bg-white text-[#19191C] font-extrabold px-10 md:justify-between z-50`}
         id="myHeader"
       >
         <div className="navbar-start">
