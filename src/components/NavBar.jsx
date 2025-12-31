@@ -82,25 +82,25 @@ export default function NavBar() {
     </>
   );
 
-  const [isVisible, setIsVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
+  // const [isVisible, setIsVisible] = useState(true);
+  // const [lastScrollY, setLastScrollY] = useState(0);
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
+  // useEffect(() => {
+  //   const handleScroll = () => {
+  //     const currentScrollY = window.scrollY;
 
-      if (currentScrollY > lastScrollY && currentScrollY > 100) {
-        setIsVisible(false); // Scrolling Down
-      } else {
-        setIsVisible(true); // Scrolling Up
-      }
+  //     if (currentScrollY > lastScrollY && currentScrollY > 100) {
+  //       setIsVisible(false); // Scrolling Down
+  //     } else {
+  //       setIsVisible(true); // Scrolling Up
+  //     }
 
-      setLastScrollY(currentScrollY);
-    };
+  //     setLastScrollY(currentScrollY);
+  //   };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [lastScrollY]);
+  //   window.addEventListener("scroll", handleScroll);
+  //   return () => window.removeEventListener("scroll", handleScroll);
+  // }, [lastScrollY]);
 
   return (
     <>
@@ -126,10 +126,14 @@ export default function NavBar() {
         <p className="my-0">Acid Wash Drop is Back in Stock!</p>
       </div>
       {/* Navbar */}
-      <nav
-        className={`fixed top-0 w-full z-50 transition-transform duration-300 ${
+      {/* <nav
+        className={`sticky top-0 left-0 w-full z-50 transition-transform duration-300 ${
           isVisible ? "translate-y-0" : "-translate-y-full"
         } shadow-md navbar bg-white text-[#19191C] font-extrabold px-10 md:justify-between z-50`}
+        id="myHeader"
+      > */}
+      <nav
+        className={`w-full transition-transform duration-300 shadow-md navbar bg-white text-[#19191C] font-extrabold px-10 md:justify-between z-50`}
         id="myHeader"
       >
         <div className="navbar-start">
