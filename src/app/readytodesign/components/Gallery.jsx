@@ -43,8 +43,8 @@ function Gallery() {
           className="glightbox"
           key={product.id}
           data-gallery="product-gallery" // Groups images into a single gallery
-          data-title={product.name}
-          data-description={product.description}
+          data-title={product.title}
+          data-description={`${product.title} - ${product.description} <hr><br> SM Size Price: $${product.smprice} <br> MD Size Price: $${product.mdprice} <br> LG Size Price: $${product.lgprice} <br> XL Size Price: $${product.xlprice} <br> XXL Size Price: $${product.xxlprice}<hr><br> Contact us to order!`}
         >
           <Image
             src={product.image}

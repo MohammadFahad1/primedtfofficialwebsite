@@ -2,9 +2,27 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, use } from "react";
 
 export default function NavBar() {
+  const [topHeader1, settopHeader1] = useState([]);
+  const [topHeader2, settopHeader2] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/v1/messages/topheader1/")
+      .then((res) => res.json())
+      .then((data) => {
+        settopHeader1(data);
+      })
+      .catch((err) => console.log(err));
+    fetch("http://127.0.0.1:8000/api/v1/messages/topheader2/")
+      .then((res) => res.json())
+      .then((data) => {
+        settopHeader2(data);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const NavMenu = (
     <>
       <li>
@@ -82,56 +100,30 @@ export default function NavBar() {
     </>
   );
 
-  // const [isVisible, setIsVisible] = useState(true);
-  // const [lastScrollY, setLastScrollY] = useState(0);
-
-  // useEffect(() => {
-  //   const handleScroll = () => {
-  //     const currentScrollY = window.scrollY;
-
-  //     if (currentScrollY > lastScrollY && currentScrollY > 100) {
-  //       setIsVisible(false); // Scrolling Down
-  //     } else {
-  //       setIsVisible(true); // Scrolling Up
-  //     }
-
-  //     setLastScrollY(currentScrollY);
-  //   };
-
-  //   window.addEventListener("scroll", handleScroll);
-  //   return () => window.removeEventListener("scroll", handleScroll);
-  // }, [lastScrollY]);
-
   return (
     <>
       {/* Top Header */}
-      <marquee
-        loop={true}
-        className="bg-[#bf2340] px-5 py-1 md:py-2 text-md md:text-xl font-bold text-white m-0"
-      >
-        <span className="mr-8 my-0">
-          Working Hours: 10:30 AM to 8:30 PM | Working Days: Saturday - Thursday
-          | (B2B Only)
-        </span>
-        <span className="mr-8 my-0">
-          Working Hours: 10:30 AM to 8:30 PM | Working Days: Saturday - Thursday
-          | (B2B Only)
-        </span>
-        <span className="mr-8 my-0">
-          Working Hours: 10:30 AM to 8:30 PM | Working Days: Saturday - Thursday
-          | (B2B Only)
-        </span>
-      </marquee>
-      <div className="bg-black px-5 py-1 text-sm md:py-2 md:text-md text-center font-bold text-white -mt-2 my-0">
-        <p className="my-0">Acid Wash Drop is Back in Stock!</p>
-      </div>
-      {/* Navbar */}
-      {/* <nav
-        className={`sticky top-0 left-0 w-full z-50 transition-transform duration-300 ${
-          isVisible ? "translate-y-0" : "-translate-y-full"
-        } shadow-md navbar bg-white text-[#19191C] font-extrabold px-10 md:justify-between z-50`}
-        id="myHeader"
-      > */}
+      {topHeader1.length > 0 && (
+        <marquee
+          loop={true}
+          className="bg-[#bf2340] px-5 py-1 md:py-2 text-md md:text-xl font-bold text-white m-0"
+        >
+          {topHeader1.map((header) => (
+            <span key={header.id} className="mr-8 my-0">
+              {header.message}
+            </span>
+          ))}
+        </marquee>
+      )}
+      {topHeader2.length > 0 && (
+        <div className="bg-black px-5 py-1 text-sm md:py-2 md:text-md text-center font-bold text-white -mt-2 my-0">
+          {topHeader2.map((header) => (
+            <span key={header.id} className="mr-8 my-0">
+              {header.message}
+            </span>
+          ))}
+        </div>
+      )}
       <nav
         className={`w-full transition-transform duration-300 shadow-md navbar bg-white text-[#19191C] font-extrabold px-10 md:justify-between z-50`}
         id="myHeader"
