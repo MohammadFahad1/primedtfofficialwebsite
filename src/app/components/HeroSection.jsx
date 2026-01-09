@@ -1,8 +1,19 @@
+"use client";
 import Image from "next/image";
-import React from "react";
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
 
 export default function HeroSection() {
   const VIDEO_URL = "/assets/hero-section-bg.mp4";
+
+  const [Buttons, setButtons] = useState([]);
+
+  useEffect(() => {
+    fetch("http://127.0.0.1:8000/api/v1/messages/herobuttons/")
+      .then((res) => res.json())
+      .then((data) => setButtons(data))
+      .catch((err) => console.log(err));
+  }, []);
 
   return (
     <section className="relative md:min-h-screen overflow-hidden">
@@ -33,40 +44,30 @@ export default function HeroSection() {
             TRANSFERS
           </h1>
           <div className="flex md:flex-row flex-col items-center justify-center gap-2">
-            <button className="uppercase cursor-pointer font-bold flex items-center gap-1 shadow-lg hover:shadow-xl transition-shadow bg-cyan-300 text-black hover:text-white px-4 py-3 rounded-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="size-6 font-extrabold"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M8.25 18.75a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 0 1-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 0 0-3.213-9.193 2.056 2.056 0 0 0-1.58-.86H14.25M16.5 18.75h-2.25m0-11.177v-.958c0-.568-.422-1.048-.987-1.106a48.554 48.554 0 0 0-10.026 0 1.106 1.106 0 0 0-.987 1.106v7.635m12-6.677v6.677m0 4.5v-4.5m0 0h-12"
-                />
-              </svg>
-              SHIP FAST
-            </button>
-            <button className="uppercase cursor-pointer font-bold flex items-center gap-1 shadow-lg hover:shadow-xl transition-shadow bg-[#d66b4a] text-black hover:text-white px-4 py-3 rounded-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                strokeWidth={2}
-                stroke="currentColor"
-                className="size-6 font-extrabold"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
-                />
-              </svg>
-              ORDER DTF PRINTS
-            </button>
+            {Buttons.length > 0 &&
+              Buttons.map((button) => (
+                <Link
+                  href={button.button_link}
+                  key={button.id}
+                  className="uppercase cursor-pointer font-bold flex items-center gap-1 shadow-lg hover:shadow-xl transition-shadow bg-[#d66b4a] text-black hover:text-white px-4 py-3 rounded-full"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="size-6 font-extrabold"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M9 12.75 11.25 15 15 9.75M21 12c0 1.268-.63 2.39-1.593 3.068a3.745 3.745 0 0 1-1.043 3.296 3.745 3.745 0 0 1-3.296 1.043A3.745 3.745 0 0 1 12 21c-1.268 0-2.39-.63-3.068-1.593a3.746 3.746 0 0 1-3.296-1.043 3.745 3.745 0 0 1-1.043-3.296A3.745 3.745 0 0 1 3 12c0-1.268.63-2.39 1.593-3.068a3.745 3.745 0 0 1 1.043-3.296 3.746 3.746 0 0 1 3.296-1.043A3.746 3.746 0 0 1 12 3c1.268 0 2.39.63 3.068 1.593a3.746 3.746 0 0 1 3.296 1.043 3.746 3.746 0 0 1 1.043 3.296A3.745 3.745 0 0 1 21 12Z"
+                    />
+                  </svg>
+                  {button.button_text}
+                </Link>
+              ))}
           </div>
           <p className="my-8 text-md md:text-2xl font-semibold text-gray-200 w-full md:max-w-3xl px-7 mx-auto">
             No more cracked prints or frustrating delays. DTFSheet delivers
