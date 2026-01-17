@@ -9,7 +9,7 @@ export default function HeroSection() {
   const [Buttons, setButtons] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/v1/messages/herobuttons/")
+    fetch("https://prime-dtf-backend.vercel.app/api/v1/messages/herobuttons/")
       .then((res) => res.json())
       .then((data) => setButtons(data))
       .catch((err) => console.log(err));

@@ -9,7 +9,9 @@ const CustomerReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        await fetch("http://127.0.0.1:8000/api/v1/messages/googlemapreviews/")
+        await fetch(
+          "https://prime-dtf-backend.vercel.app/api/v1/messages/googlemapreviews/",
+        )
           .then((res) => res.json())
           .then((data) => {
             setAllReviews(data.sort((a, b) => b.time - a.time));

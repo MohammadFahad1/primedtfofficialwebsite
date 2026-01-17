@@ -1,83 +1,31 @@
 "use client";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PrintingProcess from "./PrintingProcess";
 
 const Tshirt = () => {
-  const ALL_COLORS = [
-    // Row 1
-    { name: "Black", hex: "#1f2937" },
-    { name: "White", hex: "#ffffff" },
-    { name: "Deep Red", hex: "#881337" },
-    { name: "Dark Pink", hex: "#be185d" },
-    { name: "Teal", hex: "#0d9488" },
-    { name: "Hot Pink", hex: "#db2777" },
-    { name: "Maroon", hex: "#881337" },
-    { name: "Sky Blue", hex: "#3b82f6" },
-    { name: "Gray", hex: "#6b7280" },
-    { name: "Crimson", hex: "#b91c1c" },
-    { name: "Yellow", hex: "#facc15" },
-    { name: "Bright Yellow", hex: "#eab308" },
-    { name: "Dark Green", hex: "#166534" },
-    { name: "Dark Gray", hex: "#374151" },
-    { name: "Mustard", hex: "#ca8a04" },
+  const [product, setProduct] = useState({});
 
-    // Row 2
-    { name: "Stone Gray", hex: "#6b7280" },
-    { name: "Plum", hex: "#a855f7" },
-    { name: "True Red", hex: "#991b1b" },
-    { name: "Aqua", hex: "#06b6d4" },
-    { name: "Magenta", hex: "#f97316" },
-    { name: "Deep Blue", hex: "#1e3a8a" },
-    { name: "Sage Green", hex: "#34d399" },
-    { name: "Violet", hex: "#7c3aed" },
-    { name: "Wine", hex: "#701a75" },
-    { name: "Charcoal", hex: "#374151" },
-    { name: "Peach", hex: "#fb923c" },
-    { name: "Coral", hex: "#f87171" },
-    { name: "Royal Purple", hex: "#4f46e5" },
-    { name: "Vibrant Red", hex: "#dc2626" },
-    { name: "Blue Sky", hex: "#2563eb" },
-    { name: "Deep Teal", hex: "#0f766e" },
-
-    // Row 3
-    { name: "Light Pink", hex: "#f472b6" },
-    { name: "Beige", hex: "#e5e7eb" },
-    { name: "Slate Gray", hex: "#4b5563" },
-    { name: "Forest Green", hex: "#16a34a" },
-    { name: "Pine Green", hex: "#059669" },
-    { name: "Emerald", hex: "#047857" },
-    { name: "Olive Green", hex: "#65a30d" },
-    { name: "Light Purple", hex: "#d8b4fe" },
-    { name: "Pale Pink", hex: "#f9e7f8" },
-    { name: "Lime Green", hex: "#a3e635" },
-    { name: "Khaki", hex: "#e4e4e7" },
-    { name: "Dusty Rose", hex: "#d946ef" },
-    { name: "Moss Green", hex: "#3f6212" },
-    { name: "Light Mint", hex: "#ccfbf1" },
-    { name: "Pale Green", hex: "#d1fae5" },
-
-    // Row 4
-    { name: "Midnight Blue", hex: "#111827" },
-    { name: "Bright Orange", hex: "#ea580c" },
-    { name: "Navy", hex: "#1e3a8a" },
-    { name: "Cherry Red", hex: "#b91c1c" },
-    { name: "Dark Olive", hex: "#4f5e51" },
-    { name: "Silver", hex: "#d1d5db" },
-    { name: "Taupe", hex: "#a8a29e" },
-    { name: "Ocean Blue", hex: "#0284c7" },
-    { name: "Soft Blue", hex: "#93c5fd" },
-    { name: "Light Gray", hex: "#9ca3af" },
-    { name: "Faded Teal", hex: "#0d9488" },
-  ];
+  useEffect(() => {
+    fetch(
+      "http://127.0.0.1:8000/api/v1/products/products/?product_type=Blank%20T-Shirts",
+    )
+      .then((res) => res.json())
+      .then((data) => {
+        setProduct(data[0]);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
 
   const ALL_SIZES = [
-    { name: "Small", abbreviation: "S", price: 5.99 },
-    { name: "Medium", abbreviation: "M", price: 7.99 },
-    { name: "Large", abbreviation: "L", price: 9.99 },
-    { name: "X-Large", abbreviation: "XL", price: 11.99 },
-    { name: "XX-Large", abbreviation: "XXL", price: 13.99 },
-    { name: "XXX-Large", abbreviation: "XXXL", price: 15.99 },
+    { name: "Small", abbreviation: "S", price: product?.smprice },
+    { name: "Medium", abbreviation: "M", price: product?.mdprice },
+    { name: "Large", abbreviation: "L", price: product?.lgprice },
+    { name: "X-Large", abbreviation: "XL", price: product?.xlprice },
+    { name: "XX-Large", abbreviation: "XXL", price: product?.xxlprice },
+    { name: "XXX-Large", abbreviation: "XXXL", price: product?.xxxlprice },
   ];
 
   const [CurrentSize, setCurrentSize] = useState(ALL_SIZES[0]);

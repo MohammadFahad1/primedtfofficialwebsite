@@ -9,13 +9,13 @@ export default function NavBar() {
   const [topHeader2, settopHeader2] = useState([]);
 
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/v1/messages/topheader1/")
+    fetch("https://prime-dtf-backend.vercel.app/api/v1/messages/topheader1/")
       .then((res) => res.json())
       .then((data) => {
         settopHeader1(data);
       })
       .catch((err) => console.log(err));
-    fetch("http://127.0.0.1:8000/api/v1/messages/topheader2/")
+    fetch("https://prime-dtf-backend.vercel.app/api/v1/messages/topheader2/")
       .then((res) => res.json())
       .then((data) => {
         settopHeader2(data);

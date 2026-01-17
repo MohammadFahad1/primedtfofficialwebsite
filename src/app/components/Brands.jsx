@@ -12,7 +12,7 @@ import "swiper/css/pagination";
 const BrandSlider = () => {
   const [brands, setBrands] = useState([]);
   useEffect(() => {
-    fetch("http://127.0.0.1:8000/api/v1/messages/partnerbrands/")
+    fetch("https://prime-dtf-backend.vercel.app/api/v1/messages/partnerbrands/")
       .then((res) => res.json())
       .then((data) => setBrands(data))
       .catch((error) => console.error("Error fetching brand data:", error));
