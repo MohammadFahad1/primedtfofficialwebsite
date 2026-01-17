@@ -5,7 +5,6 @@ import Reviews from "./Reviews";
 
 const CustomerReviews = () => {
   const [AllReviews, setAllReviews] = useState([]);
-  const [PlaceDetails, setPlaceDetails] = useState([]);
 
   useEffect(() => {
     const fetchReviews = async () => {
@@ -13,7 +12,6 @@ const CustomerReviews = () => {
         await fetch("http://127.0.0.1:8000/api/v1/messages/googlemapreviews/")
           .then((res) => res.json())
           .then((data) => {
-            setPlaceDetails(data);
             setAllReviews(data.sort((a, b) => b.time - a.time));
           })
           .catch((error) => {
@@ -27,10 +25,16 @@ const CustomerReviews = () => {
     fetchReviews();
   }, []);
 
+  let rating = 0;
+  AllReviews.forEach((review) => {
+    rating += review.rating;
+  });
+  rating = rating / AllReviews.length;
+
   return (
     <section className="w-full md:pt-20 md:pb-10 md:px-10 py-5 px-4">
       <h3 className="md:text-xl text-md font-semibold uppercase text-center md:text-left">
-        {PlaceDetails.total_reviews}+ verıfıed 5-star revıews
+        {AllReviews.length}+ verıfıed 5-star revıews
       </h3>
       <div className="flex flex-col md:flex-row items-center justify-center md:justify-between gap-2.5">
         <h2 className="mb-5 mt-2 text-3xl md:text-6xl font-semibold text-black tracking-tighter uppercase md:leading-none">
@@ -46,7 +50,7 @@ const CustomerReviews = () => {
 
         <div className="p-3 md:p-4 bg-[#f5f5f5] w-full md:w-auto min-w-[300px] rounded">
           <h3 className="font-semibold text-md md:text-3xl tracking-tight text-center">
-            {PlaceDetails.total_reviews}+ REVIEWS <br />
+            {AllReviews.length}+ REVIEWS <br />
             <span
               className="text-[#19181E] relative top-0 left-1"
               style={{ zIndex: 1 }}
@@ -58,7 +62,10 @@ const CustomerReviews = () => {
               ON GOOGLE
             </span>
             <br />
-            <p className="pt-3 underline">{PlaceDetails.rating}/5.0</p>
+            {/* here is some kahini */}
+            <p className="pt-3 underline">
+              {AllReviews.length > 0 && rating.toFixed(1)}/5.0
+            </p>
           </h3>
         </div>
       </div>
@@ -77,10 +84,10 @@ const CustomerReviews = () => {
         </div>
         <div>
           <p className="text-md font-semibold">
-            {PlaceDetails.name} | Custom Shirt Transfers
+            PrimeDTF | Custom Shirt Transfers
           </p>
           <div className="text-[#f8aa00] text-lg font-semibold flex gap-2 items-center">
-            <p>{PlaceDetails.rating}</p>
+            <p>{AllReviews.length > 0 && rating.toFixed(1)}</p>
             <div className="rating">
               <input
                 type="radio"
@@ -122,7 +129,7 @@ const CustomerReviews = () => {
           </div>
           <div className="flex gap-2 items-center">
             <p className="text-sm text-gray-500 md:text-md">
-              {PlaceDetails.total_reviews} reviews on
+              {AllReviews.length} reviews on
             </p>{" "}
             <Image
               src="/assets/google.png"

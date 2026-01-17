@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const FeatureHighlights = () => {
@@ -46,9 +47,12 @@ const FeatureHighlights = () => {
             </span>{" "}
             THAT SELL
           </h2>
-          <button className="bg-black hover:bg-[#202020] px-5 py-2 md:py-4 rounded-md text-md md:text-xl text-white uppercase font-bold hover:scale-105 transition-transform cursor-pointer tracking-tighter mt-3 md:mt-5 w-full md:max-w-[200px]">
+          <Link
+            href="/blanks/tshirts"
+            className="bg-black hover:bg-[#202020] px-5 py-2 md:py-4 rounded-md text-md md:text-xl text-white uppercase font-bold hover:scale-105 transition-transform cursor-pointer tracking-tighter mt-3 md:mt-5 w-max md:max-w-[200px]"
+          >
             Try It Now
-          </button>
+          </Link>
         </div>
         {/* Card 2 Ends */}
       </div>
