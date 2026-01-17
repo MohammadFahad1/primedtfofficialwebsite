@@ -10,11 +10,11 @@ const CustomerReviews = () => {
   useEffect(() => {
     const fetchReviews = async () => {
       try {
-        await fetch("/api/place-details")
+        await fetch("http://127.0.0.1:8000/api/v1/messages/googlemapreviews/")
           .then((res) => res.json())
           .then((data) => {
             setPlaceDetails(data);
-            setAllReviews(data.reviews.sort((a, b) => b.time - a.time));
+            setAllReviews(data.sort((a, b) => b.time - a.time));
           })
           .catch((error) => {
             console.error("Error parsing JSON:", error);

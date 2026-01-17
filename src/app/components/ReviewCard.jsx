@@ -11,6 +11,21 @@ const ReviewCard = ({
   photos,
   reviewKey,
 }) => {
+  const dateObject = new Date(time);
+
+  const simpleOptions = {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Asia/Dhaka",
+    hour12: true,
+  };
+
+  const simpleLocalTime = dateObject.toLocaleString("en-BD", simpleOptions);
+
   return (
     <article className="relative max-w-3xl w-full bg-[#f5f5f5] backdrop-blur-sm rounded-2xl p-6 shadow-lg border border-gray-200 min-h-56">
       <div className="flex justify-between">
@@ -24,7 +39,7 @@ const ReviewCard = ({
           />
           <div>
             <h3 className="text-gray-800 font-semibold text-lg">{name}</h3>
-            <p className="text-sm text-gray-400 mt-0.5">{time}</p>
+            <p className="text-sm text-gray-400 mt-0.5">{simpleLocalTime}</p>
           </div>
         </div>
 
@@ -124,8 +139,8 @@ const ReviewCard = ({
           <div className="flex -space-x-3">
             {photos?.slice(0, 2).map((photo, index) => (
               <Image
-                key={index}
-                src={photo.image_url}
+                key={photo.id}
+                src={photo.photo}
                 height={100}
                 width={300}
                 alt={`Review photo ${index + 1}`}

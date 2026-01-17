@@ -73,7 +73,11 @@ export default function HeroSection() {
             No more cracked prints or frustrating delays. DTFSheet delivers
             high-quality, press-ready DTF transfers that you can count on.
           </p>
-          <button className="uppercase cursor-pointer font-bold flex items-center gap-2 shadow-lg hover:shadow-xl bg-slate-50 text-black hover:scale-105 transition-transform px-8 py-4 rounded-md mx-auto">
+          <Link
+            href="https://wa.me/+8801805123116"
+            target="_blank"
+            className="uppercase cursor-pointer font-bold flex items-center gap-2 shadow-lg hover:shadow-xl bg-slate-50 text-black hover:scale-105 transition-transform px-8 py-4 rounded-md mx-auto w-max"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -104,7 +108,7 @@ export default function HeroSection() {
                 d="m4.5 19.5 15-15m0 0H8.25m11.25 0v11.25"
               />
             </svg>
-          </button>
+          </Link>
           <h3 className="md:text-xl font-semibold uppercase text-white mt-7 flex items-center justify-center gap-2">
             <div className="avatar-group -space-x-2">
               <div className="avatar border-white border-2">

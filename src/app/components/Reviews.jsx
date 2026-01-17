@@ -34,13 +34,13 @@ const Reviews = ({ AllReviews }) => {
           AllReviews.map((review, index) => (
             <SwiperSlide key={index} className="flex justify-center">
               <ReviewCard
-                profileImage={review.profile_photo_url}
-                name={review.author_name}
-                time={review.relative_time_description}
+                profileImage={review.profileImage}
+                name={review.name}
+                time={review.time}
                 rating={review.rating}
-                review={review.text}
+                review={review.review}
                 photos={review.photos}
-                reviewKey={review.time}
+                reviewKey={review.id}
               />
             </SwiperSlide>
           ))}
