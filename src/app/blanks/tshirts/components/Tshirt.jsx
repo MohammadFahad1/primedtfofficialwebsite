@@ -5,31 +5,43 @@ import PrintingProcess from "./PrintingProcess";
 
 const Tshirt = () => {
   const [product, setProduct] = useState({});
+  const [CurrentColor, setCurrentColor] = useState({});
+  const [ALL_SIZES, setALL_SIZES] = useState([
+    { name: "Small", abbreviation: "S", price: 0 },
+    { name: "Medium", abbreviation: "M", price: 0 },
+    { name: "Large", abbreviation: "L", price: 0 },
+    { name: "X-Large", abbreviation: "XL", price: 0 },
+    { name: "XX-Large", abbreviation: "XXL", price: 0 },
+    { name: "XXX-Large", abbreviation: "XXXL", price: 0 },
+  ]);
+
+  const [CurrentSize, setCurrentSize] = useState(ALL_SIZES[0]);
 
   useEffect(() => {
     fetch(
-      "http://127.0.0.1:8000/api/v1/products/products/?product_type=Blank%20T-Shirts",
+      "http://127.0.0.1:8000/api/v1/products/products/?product_type=Blank+T-Shirts",
     )
       .then((res) => res.json())
       .then((data) => {
         setProduct(data[0]);
+        setCurrentColor(data[0].colors[0]);
+        // Set prices for sizes
+        setCurrentSize({ ...ALL_SIZES[0], price: data[0].smprice });
+        ALL_SIZES[0].price = data[0].smprice;
+        ALL_SIZES[1].price = data[0].mdprice;
+        ALL_SIZES[2].price = data[0].lgprice;
+        ALL_SIZES[3].price = data[0].xlprice;
+        ALL_SIZES[4].price = data[0].xxlprice;
+        ALL_SIZES[5].price = data[0].xxxlprice;
       })
       .catch((error) => {
         console.log(error);
       });
   }, []);
 
-  const ALL_SIZES = [
-    { name: "Small", abbreviation: "S", price: product?.smprice },
-    { name: "Medium", abbreviation: "M", price: product?.mdprice },
-    { name: "Large", abbreviation: "L", price: product?.lgprice },
-    { name: "X-Large", abbreviation: "XL", price: product?.xlprice },
-    { name: "XX-Large", abbreviation: "XXL", price: product?.xxlprice },
-    { name: "XXX-Large", abbreviation: "XXXL", price: product?.xxxlprice },
-  ];
-
-  const [CurrentSize, setCurrentSize] = useState(ALL_SIZES[0]);
-  const [CurrentColor, setCurrentColor] = useState(ALL_COLORS[0]);
+  if (product.smprice === undefined) {
+    return <p>Loading...</p>;
+  }
 
   return (
     <section>
@@ -37,59 +49,64 @@ const Tshirt = () => {
         {/* Tshirt */}
         <div className="md:w-[40%]">
           <Image
-            src={"/assets/blank-tshirt.png"}
+            src={CurrentColor.images[0].image}
             alt="Blank Tshirt"
             width={400}
             height={400}
             className="mx-auto w-full"
-            style={{ backgroundColor: CurrentColor.hex }}
+            style={{ backgroundColor: CurrentColor.color_code_hex }}
           />
         </div>
 
         {/* Selectors and Pricing */}
         <div className="md:w-[60%] text-left">
           <h1 className="text-xl md:text-3xl lg:text-5xl">
-            Gildan-Softstyle® T-Shirt-64000 - {CurrentColor.name}
+            {product.title} - {CurrentColor.color_name}
           </h1>
           <p className="text-sm md:text-md my-5">
-            <b>Size:</b> {CurrentSize.name} ( {CurrentSize.abbreviation} )
+            <b>Size:</b> {CurrentSize.color_name} ( {CurrentSize.abbreviation} )
           </p>
 
           {/* Size Buttons */}
           <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-5">
-            {ALL_SIZES.map((size, index) => (
-              <button
-                key={index}
-                className={`border px-4 py-2 rounded ${
-                  CurrentSize.name === size.name ? "bg-gray-900 text-white" : ""
-                } hover:bg-gray-900 hover:text-white cursor-pointer transition-colors duration-300`}
-                onClick={() => setCurrentSize(size)}
-              >
-                {size.name}
-              </button>
-            ))}
+            {ALL_SIZES.map(
+              (size, index) =>
+                size.price !== 0 && (
+                  <button
+                    key={index}
+                    className={`border px-4 py-2 rounded ${
+                      CurrentSize.name === size.name
+                        ? "bg-gray-900 text-white"
+                        : ""
+                    } hover:bg-gray-900 hover:text-white cursor-pointer transition-colors duration-300`}
+                    onClick={() => setCurrentSize(size)}
+                  >
+                    {size.abbreviation}
+                  </button>
+                ),
+            )}
           </div>
           {/* Color Buttons*/}
           <p className="text-sm md:text-md mb-3">
             <b>
               Colors:{" "}
               <span className="bg-amber-200 p-1">
-                (Selected Color: {CurrentColor.name})
+                (Selected Color: {CurrentColor.color_name})
               </span>
             </b>
           </p>
           <div className="flex flex-wrap gap-2 justify-center md:justify-start mb-5">
-            {ALL_COLORS.map((color, index) => (
+            {product.colors.map((color, index) => (
               <button
                 key={index}
                 className={`border px-4 py-4 rounded hover:ring-2 hover:ring-offset-2 cursor-pointer transition-all duration-300 ${
-                  CurrentColor.name === color.name
+                  CurrentColor.color_name === color.color_name
                     ? "ring-2 ring-offset-2 ring-gray-900"
                     : ""
                 }`}
                 onClick={() => setCurrentColor(color)}
-                style={{ backgroundColor: color.hex }}
-                title={color.name}
+                style={{ backgroundColor: color.color_code_hex }}
+                title={color.color_name}
               ></button>
             ))}
           </div>
