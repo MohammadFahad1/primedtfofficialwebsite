@@ -19,7 +19,7 @@ const Tshirt = () => {
 
   useEffect(() => {
     fetch(
-      "http://127.0.0.1:8000/api/v1/products/products/?product_type=Blank+T-Shirts",
+      "https://prime-dtf-backend.vercel.app/api/v1/products/products/?product_type=Blank+T-Shirts",
     )
       .then((res) => res.json())
       .then((data) => {
