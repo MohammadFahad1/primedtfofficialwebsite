@@ -78,6 +78,14 @@ export default function NavBar() {
                 Blank Hoodies
               </Link>
             </li>
+            <li>
+              <Link
+                className="px-3 py-3 text-black bg-white shadow hover:bg-[#bf2340] hover:text-white transition-colors rounded duration-300"
+                href={"/blanks/acidwashedtshirt"}
+              >
+                Acid Washed T-Shirt
+              </Link>
+            </li>
           </ul>
         </div>
       </li>
