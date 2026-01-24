@@ -51,7 +51,7 @@ const BrandSlider = () => {
         >
           {brands.map((brand, index) => (
             <SwiperSlide key={index}>
-              <div className="flex justify-center items-center grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all duration-300 h-24">
+              <div className="flex justify-center items-center opacity-70 hover:transform hover:scale-110 hover:opacity-100 transition-all duration-300 h-24">
                 <div className="relative w-full h-full">
                   <Image
                     src={brand.logo}
