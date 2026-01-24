@@ -122,16 +122,16 @@ const AcidWashTshirt = () => {
             </span>
           </h2>
           <h3 className="text-center mt-4 text-base md:text-lg">
-            Order your design through email to&nbsp;
+            Order your design, Call us &nbsp;
             <a
               href="mailto:primedtf71@gmail.com"
               className="text-blue-600 underline"
               target="_blank"
               rel="noopener noreferrer"
             >
-              primedtf71@gmail.com
+              01805123116
             </a>
-            &nbsp; and mention your preferred DTF sheet size.
+            &nbsp; and tell us about your preferred DTF sheet.
           </h3>
         </div>
       </div>
