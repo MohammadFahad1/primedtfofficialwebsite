@@ -26,7 +26,10 @@ const Tshirt = () => {
         setProduct(data[0]);
         setCurrentColor(data[0].colors[0]);
         // Set prices for sizes
-        setCurrentSize({ ...ALL_SIZES[0], price: data[0].smprice });
+        setCurrentSize({
+          ...ALL_SIZES[0],
+          price: data[0].smprice == 0 ? data[0].mdprice : data[0].smprice,
+        });
         ALL_SIZES[0].price = data[0].smprice;
         ALL_SIZES[1].price = data[0].mdprice;
         ALL_SIZES[2].price = data[0].lgprice;
